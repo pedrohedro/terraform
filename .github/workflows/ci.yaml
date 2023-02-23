@@ -24,12 +24,12 @@ jobs:
 
       - name: Validar Terraform
         run: terraform validate
-        working-directory: ../../gce
+        working-directory: gce
 
       - name: Planejar Terraform
         run: terraform plan ${{ env.TF_CLI_ARGS }}
-        working-directory: ./../gce
+        working-directory: gce
 
       - name: Aplicar Terraform
         run: terraform apply ${{ env.TF_CLI_ARGS }}
-        working-directory: ./../gce
+        working-directory: gce
