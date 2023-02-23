@@ -1,0 +1,35 @@
+name: Executar Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  TF_VERSION: 1.1.4
+  TF_CLI_ARGS: "-no-color"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configurar Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Validar Terraform
+        run: terraform validate
+        working-directory: ../../gce
+
+      - name: Planejar Terraform
+        run: terraform plan ${{ env.TF_CLI_ARGS }}
+        working-directory: ./../gce
+
+      - name: Aplicar Terraform
+        run: terraform apply ${{ env.TF_CLI_ARGS }}
+        working-directory: ./../gce
