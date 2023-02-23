@@ -15,9 +15,9 @@ resource "google_compute_instance" "instance" {
     }
   }
 
-metadata = {
+/* metadata = {
   ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
-}
+} */
 
   network_interface {
     network = "default"
