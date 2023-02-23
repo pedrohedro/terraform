@@ -1,5 +1,5 @@
 provider "google" {
-  project = "seu-projeto-id"
+  project = "white-list-372815"
   region  = "us-central1"
 }
 
