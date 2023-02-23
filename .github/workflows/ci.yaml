@@ -23,7 +23,7 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
 
       - name: Validar Terraform
-        run: terraform validate
+        run: terraform init
         working-directory: gce
 
       - name: Planejar Terraform
