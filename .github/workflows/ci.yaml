@@ -11,7 +11,7 @@ env:
   
 
 jobs: 
-  build:
+  build-and-deploy-instances-in-GCP:
     runs-on: ubuntu-latest
     
     steps:
