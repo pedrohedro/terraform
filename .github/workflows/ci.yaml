@@ -44,17 +44,22 @@ jobs:
         run: terraform apply tfplan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
         continue-on-error: true
+  
+
   ansible:
+    env: 
+      working-directory: "/home/Ansible"
     runs-on: ubuntu-latest
-    
     steps: 
+  
       - name: Checkout other repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: pedrohedro/Ansible
           ref: main
       - name: Install Ansible
         run: |
+          cd Ansible
           sudo apt-get update && sudo apt-get install -y ansible
           ls -a 
           
