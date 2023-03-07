@@ -17,15 +17,13 @@ jobs:
     steps:
       - uses: 'actions/checkout@v3'
 
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
+      - name: Configure Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
         with:
-          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+          project_id: ${{ secrets.PROJECT_ID }}
+          service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
+          export_default_credentials: true
           
-          
-      - name: Checkout
-        uses: actions/checkout@v2
 
       - name: Configurar Terraform
         uses: hashicorp/setup-terraform@v2.0.3
@@ -37,9 +35,7 @@ jobs:
         working-directory: gce
 
       - name: Planejar Terraform
-        run: |
-          gcloud auth application-default login --quiet
-          terraform plan ${{ env.TF_CLI_ARGS }}
+        run: terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
       - name: Aplicar Terraform
