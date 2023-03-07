@@ -36,9 +36,9 @@ jobs:
         working-directory: gce
 
       - name: Planejar Terraform
-        run: terraform plan ${{ env.TF_CLI_ARGS }}
+        run: terraform plan -out tfplan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
       - name: Aplicar Terraform
-        run: terraform apply ${{ env.TF_CLI_ARGS }}
+        run: terraform apply tfplan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
