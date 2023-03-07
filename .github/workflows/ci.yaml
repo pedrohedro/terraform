@@ -38,8 +38,8 @@ jobs:
 
       - name: Planejar Terraform
         run: |
-        gcloud auth application-default login
-        terraform plan ${{ env.TF_CLI_ARGS }}
+          gcloud auth application-default login 
+          terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
       - name: Aplicar Terraform
