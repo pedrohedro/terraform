@@ -8,7 +8,7 @@ on:
 env:
   TF_VERSION: 1.1.4
   TF_CLI_ARGS: "-no-color"
-  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  
 
 jobs: 
   build:
@@ -24,9 +24,11 @@ jobs:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
           create_credentials_file: true
           
-          
+  terraform: 
+    runs-on: ubuntu-latest
+    steps: 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configurar Terraform
         uses: hashicorp/setup-terraform@v2.0.3
@@ -39,7 +41,7 @@ jobs:
 
       - name: Planejar Terraform
         run: |
-          pwd && ls -la /home/runner/work/terraform/terraform/
+          echo $GOOGLE_CREDENTIALS
           terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
