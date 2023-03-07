@@ -38,7 +38,9 @@ jobs:
         working-directory: gce
 
       - name: Planejar Terraform
-        run: terraform plan ${{ env.TF_CLI_ARGS }}
+        run: |
+          export ${{ secrets.GOOGLE_CREDENTIALS }}
+          terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
       - name: Aplicar Terraform
