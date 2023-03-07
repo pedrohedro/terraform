@@ -23,13 +23,6 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
           create_credentials_file: true
-          
-  terraform: 
-    runs-on: ubuntu-latest
-    needs: build
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v3
 
       - name: Configurar Terraform
         uses: hashicorp/setup-terraform@v2.0.3
@@ -41,8 +34,9 @@ jobs:
         working-directory: gce
 
       - name: Planejar Terraform
+         
         run: |
-          echo $GOOGLE_CREDENTIALS
+          export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_CREDENTIALS
           terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
