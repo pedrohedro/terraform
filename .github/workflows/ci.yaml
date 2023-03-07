@@ -8,6 +8,7 @@ on:
 env:
   TF_VERSION: 1.1.4
   TF_CLI_ARGS: "-no-color"
+  GOOGLE_APPLICATION_CREDENTIALS: /path/to/your/credentials.json
 
 jobs:
   build:
@@ -36,7 +37,7 @@ jobs:
         working-directory: gce
 
       - name: Planejar Terraform
-        run: terraform plan -out tfplan ${{ env.TF_CLI_ARGS }}
+        run: terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
 
       - name: Aplicar Terraform
