@@ -39,7 +39,7 @@ jobs:
 
       - name: Planejar Terraform
         run: |
-          export GOOGLE_APPLICATION_CREDENTIALS
+          export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
           pwd && ls -la 
           terraform plan ${{ env.TF_CLI_ARGS }}
         working-directory: gce
